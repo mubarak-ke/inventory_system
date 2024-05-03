@@ -1,0 +1,126 @@
+{%extends "layout.html" %}
+{%block content%}
+
+
+<body style="background-color: purple;">
+    <h1>login page</h1>
+
+
+
+    <div class="container">
+        <div class="screen">
+            <div class="screen__content">
+                <form action="/login" class="login" method="POST">
+                    {{ form.hidden_tag()}}
+                    
+                       
+                            <div class="login__field">
+
+                                {{ form.email.label(class='form-control-label')}}
+                                {% if form.email.errors%}
+                                {{ form.email(class='form-control form-control-lg is-invalid')}}
+                                <div class="invalid-feedback">
+                                    {% for error in form.email.errors %}
+                                    <span>{{error}}</span>
+                                    {% endfor %}
+                                </div>
+                                {% else %}
+                                {{ form.email(class='form-control form-control-lg')}}
+                                {% endif %}
+
+                            </div>
+
+                            <div class="login__field">
+
+                                {{ form.password.label(class='form-control-label')}}
+                                {% if form.password.errors%}
+                                {{ form.password(class='form-control form-control-lg is-invalid')}}
+                                <div class="invalid-feedback">
+                                    {% for error in form.password.errors %}
+                                    <span>{{error}}</span>
+                                    {% endfor %}
+                                </div>
+                                {% else %}
+                                {{ form.password(class='form-control form-control-lg')}}
+                                {% endif %}
+                            </div>
+
+                            <!-- <button class="button login__submit">
+
+                                <input type="submit" value="Login" id="btn">
+                            </button> -->
+                            <button class="button login__submit">
+                                <span class="button__text">Log In Now</span>
+                                <i class="button__icon fas fa-chevron-right"></i>
+                            </button>
+
+                            <div class="form-check">
+                                {{form.remember(class='form-check-input')}}
+                                {{form.remember.label(class='form-check-input-label')}}
+                            </div>
+
+                            <div class="group">
+                                <p style="color: black;">Need An Account?</p>
+                                <a class="ml-2" href="{{url_for('register')}}"> Sign Up Here</a>
+                            </div>
+                            <div class="group" style="display: flex;justify-content: center;">
+                                <a href="#">Forget Password</a>
+                            </div>
+                        </div>
+                    
+                </form>
+                <div class="social-login">
+                    <h3>log in via</h3>
+                    <div class="social-icons">
+                        <a href="#" class="social-login__icon fab fa-instagram"></a>
+                        <a href="#" class="social-login__icon fab fa-facebook"></a>
+                        <a href="#" class="social-login__icon fab fa-twitter"></a>
+                    </div>
+                </div>
+            </div>
+            <div class="screen__background">
+                <span class="screen__background__shape screen__background__shape4"></span>
+                <span class="screen__background__shape screen__background__shape3"></span>
+                <span class="screen__background__shape screen__background__shape2"></span>
+                <span class="screen__background__shape screen__background__shape1"></span>
+            </div>
+        </div>
+    </div>
+
+    <!-- partial:index.partial.html -->
+    <!-- <div class="container">
+    <div class="screen">
+        <div class="screen__content">
+            <form class="login">
+                <div class="login__field">
+                    <i class="login__icon fas fa-user"></i>
+                    <input type="text" class="login__input" placeholder="User name / Email">
+                </div>
+                <div class="login__field">
+                    <i class="login__icon fas fa-lock"></i>
+                    <input type="password" class="login__input" placeholder="Password">
+                </div>
+                <button class="button login__submit">
+                    <span class="button__text">Log In Now</span>
+                    <i class="button__icon fas fa-chevron-right"></i>
+                </button>
+            </form>
+            <div class="social-login">
+                <h3>log in via</h3>
+                <div class="social-icons">
+                    <a href="#" class="social-login__icon fab fa-instagram"></a>
+                    <a href="#" class="social-login__icon fab fa-facebook"></a>
+                    <a href="#" class="social-login__icon fab fa-twitter"></a>
+                </div>
+            </div>
+        </div>
+        <div class="screen__background">
+            <span class="screen__background__shape screen__background__shape4"></span>
+            <span class="screen__background__shape screen__background__shape3"></span>
+            <span class="screen__background__shape screen__background__shape2"></span>
+            <span class="screen__background__shape screen__background__shape1"></span>
+        </div>
+    </div>
+ </div> -->
+
+    {%endblock%}

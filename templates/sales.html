@@ -1,0 +1,71 @@
+{% extends "layout.html" %}
+{% block content %}
+<!-- Button trigger modal -->
+<div class="container">
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop"
+        style="margin-left: 45% ;margin-top: 8%;">
+        Make Sales
+    </button>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">Sales</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="make_sale" method="post">
+                    <select name="pid" class="form-select" aria-label="Default select example">
+                        {% for i in products %}
+                        <option value={{i.id}}>{{i.name}}</option>
+                        {% endfor %}
+                    </select>
+                    <div class="input-group flex-nowrap">
+                        <span class="input-group-text" id="addon-wrapping">Quantity</span>
+                        <input name="quantity" type="text" class="form-control" placeholder="Quantity"
+                            aria-label="Username" aria-describedby="addon-wrapping" required>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Save</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <table id="example" class="table table-striped" style="width:100%">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Product ID</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Created At</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr {% for i in sales %}>
+                <td>{{i.id}}</td>
+                <td>{{i.pid}}</td>
+                <td>{{i.quantity}}</td>
+                <td>{{i.created_date}}</td>
+            </tr {% endfor %}>
+        </tbody>
+        <tfoot>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Product ID</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Created At</th>
+            </tr>
+        </tfoot>
+    </table>
+</div>
+{% endblock %}

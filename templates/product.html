@@ -1,0 +1,165 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<h1>products page</h1>
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
+    style="margin-left: 45%; margin-top: 7%;">
+    Add New Item
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Add Products</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+
+            </div>
+            <div class="modal-body">
+                <form action="{{ url_for('insert') }}" method="post">
+                    <div class="mb-3">
+                        <label for="Products_Name" class="form-label">Products Name</label>
+                        <input name="product_name" type="text" class="form-control" id="exampleInputEmail1"
+                            aria-describedby="emailHelp">
+                    </div>
+                    <div class="mb-3">
+                        <label for="Buying_price" class="form-label">Buying Price</label>
+                        <input name="buying_price" type="number" class="form-control" id="exampleInputPassword1">
+                    </div>
+                    <div class="mb-3">
+                        <label for="Selling_price" class="form-label">Selling Price</label>
+                        <input name="selling_price" type="number" class="form-control" id="exampleInputPassword1">
+                    </div>
+                    <div class="mb-3">
+                        <label for="stock_quantity" class="form-label">Stock quantity</label>
+                        <input name="stock_quantity" type="number" class="form-control" id="exampleInputPassword1">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Save</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">id</th>
+                <th scope="col">product name</th>
+                <th scope="col">buying_price</th>
+                <th scope="col">selling_price</th>
+                <th scope="col">stock_quantity</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr {% for i in prod %}>
+
+                <td>{{i[0]}}</td>
+                <td>{{i[1]}}</td>
+                <td>{{i[2]}}</td>
+                <td>{{i[3]}}</td>
+                <td>{{i[4]}}</td>
+            </tr {% endfor %}>
+        </tbody>
+    </table> -->
+
+
+<table id="example" class="table table-striped" style="width:100%">
+    <tr>
+        <th scope="col">id</th>
+        <th scope="col">product name</th>
+        <th scope="col">buying_price</th>
+        <th scope="col">selling_price</th>
+        <th scope="col">stock_quantity</th>
+        <th scope="col">Action</th>
+    </tr>
+    </thead>
+    <tbody>
+        <tr {% for i in products %}>
+
+            <td>{{i.id}}</td>
+            <td>{{i.name}}</td>
+            <td>{{i.buying_price}}</td>
+            <td>{{i.selling_price}}</td>
+            <td>{{i.stock_quantity}}</td>
+            <td>
+                <!-- Button trigger modal -->
+
+                <a href="/update/{{i.id}}" class="btn btn-primary btn-xs" data-bs-toggle="modal"
+                    data-bs-target="#modaledit{{i.id}}"><i class="fa-regular fa-pen-to-square fa-sm"
+                        style="color: #f5f6f8;"></i></a>
+
+
+                <a href="/delete/{{i.id}}" class="btn btn-danger btn-xs"
+                    onclick="return confirm('Are You Sure To Delete ?')"><i
+                        class="fa-solid fa-trash"></i></a>
+
+            </td>
+        </tr >
+        <!-- Modal Edit Products -->
+
+        <div id="modaledit{{i.id}}" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Update Product</h4>
+                    </div>
+
+                    <div class="modal-body">
+                        <form action="{{url_for('update')}}" method="post">
+                            <div class="form-group">
+                                <label>Product Name</label>
+                                <input type="hidden" name="id" value="{{i.id}}">
+                                <input type="text" class="form-control" name="product_name"
+                                    value="{{i.name}}">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Buying Price</label>
+                                <input type="text" class="form-control" name="buying_price"
+                                    value="{{i.buying_price}}">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Selling Price</label>
+                                <input type="text" class="form-control" name="selling_price"
+                                    value="{{i.selling_price}}">
+                            </div>
+                            <div class="form-group">
+                                <label>Stock Quantity</label>
+                                <input type="text" class="form-control" name="stock_quantity"
+                                    value="{{i.stock_quantity}}">
+                            </div>
+                            <div class="form-group">
+                                <button class="btn btn-primary" type="submit">Update</button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary"
+                            data-bs-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+    </tbody>
+    <!-- <tfoot>
+         <tr>
+            <th scope="col">id</th>
+            <th scope="col">product name</th>
+            <th scope="col">buying_price</th>
+            <th scope="col">selling_price</th>
+            <th scope="col">stock_quantity</th>
+        </tr>
+        </tfoot> -->
+</table>
+{% endblock %}

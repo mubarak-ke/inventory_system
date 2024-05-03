@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>register</title>
+</head>
+<body>
+    <h1>Register Page</h1>
+    <!-- <form method='POST' action="">
+        {{form.username}}
+        {{form.email}}
+        {{form.password}}
+        {{form.confirm_password}}
+        {{form.submit}}
+    </form>
+    <a href="{{url_for('register')}}">Don't have an account? Click here to sign up.</a> -->
+    
+
+    <form action="" method="post">
+        {{ form.hidden_tag() }} <!-- this used for security -->
+        <section>
+            <!-- <legend class="border-bottom mb-4">Create an Account</legend> -->
+
+            <div class="login">
+                <h2>Register</h2>
+                <div class="inputBox">
+                    <div>
+                        {{ form.username.label(class='form-control-label')}}
+                        {% if form.username.errors%}
+                        {{ form.username(placehloder="test")}}
+                        {{ form.username(class='form-control form-control-lg is-invalid')}}
+                        <div class="invalid-feedback">
+                            {% for error in form.username.errors %}
+                            <span>{{error}}</span>
+                            {% endfor %}
+                        </div>
+                        {% else %}
+                        {{ form.username(class='form-control form-control-lg')}}
+                        {% endif %}
+                    </div>
+                </div>
+
+
+                <div class="inputBox">
+                    <div>
+                        {{ form.email.label(class='form-control-label')}}
+                        {% if form.email.errors%}
+                        {{ form.email(class='form-control form-control-lg is-invalid')}}
+                        <div class="invalid-feedback">
+                            {% for error in form.email.errors %}
+                            <span>{{error}}</span>
+                            {% endfor %}
+                        </div>
+                        {% else %}
+                        {{ form.email(class='form-control form-control-lg')}}
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="inputBox">
+                    <div>
+                        {{ form.password.label(class='form-control-label')}}
+                        {% if form.password.errors%}
+                        {{ form.password(class='form-control form-control-lg is-invalid')}}
+                        <div class="invalid-feedback">
+                            {% for error in form.password.errors %}
+                            <span>{{error}}</span>
+                            {% endfor %}
+                        </div>
+                        {% else %}
+                        {{ form.password(class='form-control form-control-lg')}}
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="inputBox">
+                    {{ form.confirm_password.label(class='form-control-label')}}
+                    {% if form.confirm_password.errors%}
+                    {{ form.confirm_password(class='form-control form-control-lg is-invalid')}}
+                    <div class="invalid-feedback">
+                        {% for error in form.confirm_password.errors %}
+                        <span>{{error}}</span>
+                        {% endfor %}
+                    </div>
+                    {% else %}
+                    {{ form.confirm_password(class='form-control form-control-lg')}}
+                    {% endif %}
+
+                </div>
+                <div class="inputBox">
+                    <input type="submit" value="Sign Up" id="btn">
+                </div>
+                <div class="group">
+                    <p> Already have an account?</p>
+                    <a href="{{url_for('login')}}" class="ml-2">Sign In Here</a>
+                </div>
+            </div>
+        </section>
+        <div class="group">
+
+        </div>
+    </form>
+
+
+</body>
+</html>
