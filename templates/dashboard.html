@@ -60,6 +60,8 @@
 <canvas id="bar-chart1" width="800" height="450"></canvas>
 <canvas id="line-chart" width="800" height="450"></canvas>
 <canvas id="line-chart2" width="800" height="450"></canvas>
+<canvas id="bar-chart3" width="800" height="450"></canvas>
+
 
 
 <!-- chart.js link -->
@@ -120,11 +122,27 @@
   }
 });
   //  geting the remainining stock per product 
-  <div class="container-fluid pt-4 px-4">
-    <div class="row g-4">
-      <div class="col-sm-12 col-xl-6">
-      </div>
-    </div>
-  </div>
+  new Chart(document.getElementById("bar-chart3"), {
+
+type: 'bar',
+data: {
+  labels: {{ remaining_stock_label | safe}},
+datasets: [
+
+{
+  label: "remaining",
+  backgroundColor: ["#3e95cd", "#8e5ea2", "#3cba9f", "#e8c3b9", "#c45850"],
+  data: {{ remaining_stock_data | safe}}
+    }
+]
+},
+options: {
+legend: { display: false },
+title: {
+  display: true,
+  text: 'remaining in stock'
+}
+}
+});
 </script>
 {% endblock %}

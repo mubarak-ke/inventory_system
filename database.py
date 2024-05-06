@@ -148,7 +148,7 @@ def total_profit():
      return data
 #this  query calculates the remaining stockfor each product
 def get_remaining_stock_per_product():
-     query="SELECT p.name,stock_quantity-COALESCE(SUM(s.quantity),0)as remaining_stock FROM products as p LEFT JOIN sales as s on p.id=s.pid GROUP BY p.id,p.name,stock_quantity ORDER BY remaining_stock DESC;"
+     query="SELECT p.name,stock_quantity - COALESCE(SUM(s.quantity),0)as remaining_stock FROM products as p LEFT JOIN sales as s on p.id=s.pid GROUP BY p.id,p.name,stock_quantity ORDER BY remaining_stock DESC;"
      cur.execute(query)
      result=cur.fetchall()
      return result
